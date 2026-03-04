@@ -29,10 +29,9 @@ export default function Navbar({ onAnalyze }) {
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
-        {['How it works', 'Features', 'Extension'].map(item => (
-          <a key={item} href={'#' + item.toLowerCase().replace(' ', '-')}
-            style={{ color: '#9a9489', fontSize: 12, textDecoration: 'none', letterSpacing: '0.04em' }}>
-            {item}
+        {['#analyze', '#demo', '#features', '#extension'].map((h, i) => (
+          <a key={h} href={h} style={{ color: '#9a9489', fontSize: 12, textDecoration: 'none', letterSpacing: '0.04em' }}>
+            {['Analyze', 'Demo', 'Features', 'Extension'][i]}
           </a>
         ))}
       </div>

@@ -4,6 +4,7 @@ import Analyzer from './components/Analyzer'
 import Features from './components/Features'
 import Extension from './components/Extension'
 import Footer from './components/Footer'
+import DemoSimulator from './components/DemoSimulator'
 
 export default function App() {
   const ref = useRef(null)
@@ -84,6 +85,7 @@ export default function App() {
           </div>
         </div>
       </section>
+      <DemoSimulator analyzerRef={ref} />
       <div ref={ref}><Analyzer /></div>
       <Features />
       <Extension />
