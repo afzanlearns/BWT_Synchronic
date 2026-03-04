@@ -6,7 +6,7 @@ export default function Footer() {
         <span style={{ fontFamily: 'Sora,sans-serif', fontSize: 12, color: '#9a9489', letterSpacing: '0.04em' }}>CampusGuard</span>
       </div>
       <div style={{ fontFamily: 'Playfair Display,serif', fontSize: 13, color: '#2a2a2a', fontStyle: 'italic', textAlign: 'center' }}>
-        Built for the people who ask "Is this real?" — and deserve a real answer.
+        Built for the students who ask "Is this real?" — and deserve CampusGuard protection.
       </div>
       <div style={{ fontFamily: 'Sora,sans-serif', fontSize: 11, color: '#2a2a2a', letterSpacing: '0.04em' }}>
         Hackathon 2026 · PS-A

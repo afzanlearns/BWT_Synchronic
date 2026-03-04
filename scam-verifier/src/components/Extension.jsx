@@ -1,4 +1,9 @@
 import { useState } from 'react'
+import backgroundJs from '../extension_bundle/background.js?raw'
+import contentJs from '../extension_bundle/content.js?raw'
+import manifestJson from '../extension_bundle/manifest.json?raw'
+import popupHtml from '../extension_bundle/popup.html?raw'
+import popupJs from '../extension_bundle/popup.js?raw'
 const STEPS = [
   'Download + unzip the extension folder',
   'Go to chrome://extensions → Enable Developer Mode → Load unpacked',
@@ -12,11 +17,14 @@ export default function Extension() {
     try {
       const { default: Z } = await import('jszip')
       const z = new Z()
-      z.file('manifest.json', '{"manifest_version":3,"name":"ScamVerifier","version":"1.0","host_permissions":["https://web.whatsapp.com/*","https://api.groq.com/*"],"content_scripts":[{"matches":["https://web.whatsapp.com/*"],"js":["content.js"]}]}')
-      z.file('content.js', '/* Add your Groq key and paste detection logic here */')
+      z.file('background.js', backgroundJs)
+      z.file('content.js', contentJs)
+      z.file('manifest.json', manifestJson)
+      z.file('popup.html', popupHtml)
+      z.file('popup.js', popupJs)
       const b = await z.generateAsync({ type: 'blob' })
       const u = URL.createObjectURL(b), a = document.createElement('a')
-      a.href = u; a.download = 'scam-verifier-ext.zip'; a.click(); URL.revokeObjectURL(u)
+      a.href = u; a.download = 'campus-guard-ext.zip'; a.click(); URL.revokeObjectURL(u)
       setDone(true); setTimeout(() => setDone(false), 3000)
     } catch (e) { alert('Install jszip: npm install jszip') }
     finally { setBusy(false) }
@@ -56,7 +64,7 @@ export default function Extension() {
             borderRadius: 8, fontFamily: 'Sora, sans-serif',
             fontSize: 11, color: '#f4a261', lineHeight: 1.6
           }}>
-            ⚠️ After installing, open <strong>content.js</strong> and <strong>outlook_content.js</strong> and add your Groq API key before using.
+            ⚠️ After installing, click the <strong>CampusGuard icon</strong> in your browser toolbar to enter your Groq API key.
           </div>
         </div>
         <div>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>CampusGuard</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      width: 300px;
+      background: #0f0f1a;
+      color: #e0e0e0;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: #16213e;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid #1e1e3a;
+    }
+
+    .header h2 {
+      font-size: 15px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .version {
+      margin-left: auto;
+      font-size: 10px;
+      color: #444;
+      background: #1e1e3a;
+      padding: 2px 6px;
+      border-radius: 10px;
+    }
+
+    /* ── Snip CTA ── */
+    .snip-section {
+      padding: 16px;
+      background: #0a1628;
+      border-bottom: 1px solid #1e1e3a;
+    }
+
+    .snip-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      letter-spacing: 0.3px;
+      transition: opacity 0.15s;
+    }
+
+    .snip-btn:hover {
+      opacity: 0.88;
+    }
+
+    .snip-btn:active {
+      transform: scale(0.98);
+    }
+
+    .shortcut-hint {
+      text-align: center;
+      font-size: 10px;
+      color: #444;
+      margin-top: 7px;
+    }
+
+    .shortcut-hint kbd {
+      background: #1e1e3a;
+      border: 1px solid #333;
+      border-radius: 3px;
+      padding: 1px 4px;
+      font-family: monospace;
+      font-size: 10px;
+      color: #888;
+    }
+
+    /* ── Settings ── */
+    .settings-section {
+      padding: 14px 16px;
+    }
+
+    label {
+      font-size: 11px;
+      font-weight: bold;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="password"],
+    select {
+      width: 100%;
+      padding: 8px 10px;
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-radius: 7px;
+      font-size: 12px;
+      color: #e0e0e0;
+      margin-bottom: 12px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    input[type="password"]:focus,
+    select:focus {
+      border-color: #25d366;
+    }
+
+    select option {
+      background: #1a1a2e;
+    }
+
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .toggle-label {
+      font-size: 12px;
+      font-weight: bold;
+      color: #ccc;
+    }
+
+    /* Custom toggle switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 36px;
+      height: 20px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #2a2a4a;
+      border-radius: 20px;
+      transition: background 0.2s;
+    }
+
+    .slider:before {
+      content: '';
+      position: absolute;
+      height: 14px;
+      width: 14px;
+      left: 3px;
+      bottom: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+
+    input:checked+.slider {
+      background: #25d366;
+    }
+
+    input:checked+.slider:before {
+      transform: translateX(16px);
+    }
+
+    .save-btn {
+      width: 100%;
+      padding: 9px;
+      background: #1e3a5f;
+      color: #7ab3f4;
+      border: 1px solid #2a4a7f;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .save-btn:hover {
+      background: #244870;
+    }
+
+    #status {
+      font-size: 11px;
+      margin-top: 8px;
+      text-align: center;
+      min-height: 16px;
+      color: #25d366;
+    }
+
+    /* ── Stats ── */
+    .divider {
+      border: none;
+      border-top: 1px solid #1e1e3a;
+      margin: 0;
+    }
+
+    .stats-section {
+      padding: 12px 16px 14px;
+      background: #0a0a14;
+    }
+
+    .stats-title {
+      font-size: 10px;
+      font-weight: bold;
+      color: #444;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+      font-size: 12px;
+      color: #888;
+    }
+
+    .scam-count {
+      color: #e63946;
+      font-weight: bold;
+    }
+
+    .sus-count {
+      color: #f4a261;
+      font-weight: bold;
+    }
+
+    .total-count {
+      color: #7ab3f4;
+      font-weight: bold;
+    }
+
+    .reset-btn {
+      margin-top: 8px;
+      font-size: 10px;
+      color: #333;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+      width: 100%;
+      text-align: center;
+    }
+
+    .reset-btn:hover {
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <h2>CampusGuard</h2>
+    <span class="version">v3.0</span>
+  </div>
+
+  <!-- Snip CTA -->
+  <div class="snip-section">
+    <button class="snip-btn" id="snipBtn">
+      ✂️ Snip &amp; Check
+    </button>
+    <div class="shortcut-hint">
+      or press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> anytime
+    </div>
+  </div>
+
+  <!-- Settings -->
+  <div class="settings-section">
+    <label for="apiKey">Groq API Key</label>
+    <input type="password" id="apiKey" placeholder="gsk_…" autocomplete="off" />
+
+    <label for="sensitivity">Flag Sensitivity</label>
+    <select id="sensitivity">
+      <option value="both">Flag SCAM + SUSPICIOUS</option>
+      <option value="scam">Flag SCAM only</option>
+    </select>
+
+    <div class="toggle-row">
+      <span class="toggle-label">Extension Enabled</span>
+      <label class="switch">
+        <input type="checkbox" id="enabled" checked />
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <button class="save-btn" id="save">Save Settings</button>
+    <div id="status"></div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Stats -->
+  <div class="stats-section">
+    <div class="stats-title">Lifetime Stats</div>
+    <div class="stat-row">
+      <span>Scams detected</span>
+      <span class="scam-count" id="scamCount">0</span>
+    </div>
+    <div class="stat-row">
+      <span>Suspicious flagged</span>
+      <span class="sus-count" id="susCount">0</span>
+    </div>
+    <div class="stat-row">
+      <span>Total checked</span>
+      <span class="total-count" id="totalCount">0</span>
+    </div>
+    <button class="reset-btn" id="resetStats">Reset stats</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>

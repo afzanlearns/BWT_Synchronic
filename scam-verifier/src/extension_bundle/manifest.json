@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "CampusGuard",
+  "version": "3.0",
+  "description": "Snip any suspicious message on screen and get an instant AI scam verdict.",
+  "host_permissions": [
+    "https://web.whatsapp.com/*",
+    "https://api.groq.com/*",
+    "<all_urls>"
+  ],
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "start-snip": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Start snip and scan mode"
+    }
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "CampusGuard — Snip & Check"
+  }
+}
