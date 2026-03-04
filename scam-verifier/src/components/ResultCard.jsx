@@ -73,6 +73,54 @@ export default function ResultCard({ result, onReset, onShare }) {
           </div>
         </div>
       )}
+      {/* URL Intelligence */}
+      {result.urlIntelligence && (() => {
+        const { safeBrowsingFlagged, domainAgeResults, formAnalysis } = result.urlIntelligence
+        const hasFindings = safeBrowsingFlagged?.length || domainAgeResults?.some(d => d.ageInDays < 90) || formAnalysis?.hasPayment
+        if (!hasFindings) return null
+        return (
+          <div style={{ marginBottom: 16 }}>
+            <div style={{ color: '#9a9489', fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 10, fontFamily: 'Sora, sans-serif' }}>
+              URL Intelligence
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+
+              {safeBrowsingFlagged?.map((url, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, background: 'rgba(230,57,70,0.08)', border: '1px solid rgba(230,57,70,0.2)', borderRadius: 8, padding: '10px 14px' }}>
+                  <span style={{ fontSize: 14, flexShrink: 0 }}>🚫</span>
+                  <div>
+                    <div style={{ fontFamily: 'Sora, sans-serif', fontSize: 11, fontWeight: 600, color: '#e63946', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 2 }}>Google Safe Browsing — Confirmed Malicious</div>
+                    <div style={{ fontFamily: 'Sora, sans-serif', fontSize: 11, color: '#fca5a5', wordBreak: 'break-all' }}>{url}</div>
+                  </div>
+                </div>
+              ))}
+
+              {domainAgeResults?.filter(d => d.ageInDays < 90).map((d, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, background: 'rgba(244,162,97,0.08)', border: '1px solid rgba(244,162,97,0.2)', borderRadius: 8, padding: '10px 14px' }}>
+                  <span style={{ fontSize: 14, flexShrink: 0 }}>🕐</span>
+                  <div>
+                    <div style={{ fontFamily: 'Sora, sans-serif', fontSize: 11, fontWeight: 600, color: '#f4a261', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 2 }}>
+                      New Domain — {d.ageInDays < 7 ? 'Created this week' : d.ageInDays < 30 ? 'Created this month' : `Only ${d.ageInDays} days old`}
+                    </div>
+                    <div style={{ fontFamily: 'Sora, sans-serif', fontSize: 11, color: '#fdba74' }}>{d.domain} — registered {new Date(d.created).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+                  </div>
+                </div>
+              ))}
+
+              {formAnalysis?.hasPayment && (
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, background: 'rgba(230,57,70,0.08)', border: '1px solid rgba(230,57,70,0.2)', borderRadius: 8, padding: '10px 14px' }}>
+                  <span style={{ fontSize: 14, flexShrink: 0 }}>📋</span>
+                  <div>
+                    <div style={{ fontFamily: 'Sora, sans-serif', fontSize: 11, fontWeight: 600, color: '#e63946', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 2 }}>Google Form — Payment Fields Detected</div>
+                    <div style={{ fontFamily: 'Sora, sans-serif', fontSize: 11, color: '#fca5a5' }}>"{formAnalysis.title}" — contains: {formAnalysis.foundKeywords.slice(0, 4).join(', ')}</div>
+                  </div>
+                </div>
+              )}
+
+            </div>
+          </div>
+        )
+      })()}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 20 }}>
         {result.what_they_want && (
           <div style={{ background: 'rgba(230,57,70,0.06)', border: '1px solid rgba(230,57,70,0.15)', borderRadius: 10, padding: 14 }}>
