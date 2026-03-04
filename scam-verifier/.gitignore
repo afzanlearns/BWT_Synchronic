@@ -3,5 +3,8 @@ dist/
 build/
 .env
 .env.*
+AGENT_BUILD_INSTRUCTIONS.md
+CAMPUSGUARD_PLAN.md
 analyze.js
 src/utils/analyze.js
+readme.md
