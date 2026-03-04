@@ -7,9 +7,18 @@ import ResultCard from './ResultCard'
 
 const LANGS = ['English', 'Hindi', 'Tamil', 'Telugu', 'Bengali', 'Marathi']
 const EX = [
-  { label: 'Fake Job', text: 'Congratulations! Work from home. Earn Rs 50000/month. Pay Rs 500 registration fee now: 9876543210' },
-  { label: 'Fake KYC', text: 'Dear Customer, SBI account blocked in 24 hours. Update KYC: bit.ly/sbi-kyc-update' },
-  { label: 'Digital Arrest', text: 'CBI officer here. Money laundering on your Aadhaar. Digital arrest. Transfer Rs 2 lakh now.' },
+  {
+    label: 'WhatsApp Group Scam',
+    text: 'Hi! You\'ve been shortlisted for the Google India Campus Internship 2025. Please fill this form to secure your slot — only 4 remaining! docs.google.com/forms/d/example Registration fee: ₹999 (fully refundable after joining). Hurry, offer closes tonight at 11:59 PM. Contact HR: +91 9876543210'
+  },
+  {
+    label: 'Fake Job Email',
+    text: 'Dear Student, Congratulations! You have been shortlisted for the TCS Digital Intern role (₹45,000/month). To confirm your onboarding, please complete the mandatory certification course at tcs-training-portal.xyz. Course fee: ₹3,500. Pay within 24 hours or the offer will be given to the next candidate.'
+  },
+  {
+    label: 'Digital Arrest',
+    text: 'This is Deputy Commissioner of CBI. A money laundering case has been filed on your Aadhaar number. You are under digital arrest. Transfer ₹2,00,000 to avoid arrest warrant. Do not disconnect or inform anyone. This call is being recorded.'
+  },
 ]
 
 export default function Analyzer() {
@@ -129,7 +138,7 @@ export default function Analyzer() {
           </h2>
           <p style={s({ fontSize: 14, lineHeight: 1.75, color: '#9a9489', marginBottom: 32, maxWidth: 360 })}>AI-powered scam detection in seconds, in your language.</p>
           <div style={{ borderTop: '1px solid #1e1e1e', paddingTop: 28 }}>
-            {['Sub-second AI analysis', '6 Indian languages', 'Explains why, not just verdict', 'Chrome extension included'].map(f => (
+            {['Checks URLs against Google Safe Browsing', 'Verifies domain age via WHOIS', 'Scans Google Forms for payment fields', '6 Indian languages supported', 'Explains why — not just the verdict'].map(f => (
               <div key={f} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
                 <div style={{ width: 20, height: 20, borderRadius: '50%', border: '1px solid #52b788', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <span style={{ color: '#52b788', fontSize: 10 }}>v</span>
