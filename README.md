@@ -21,7 +21,7 @@
 
 <br />
 
-[**🌐 Live Demo**](https://campusguard.vercel.app) &nbsp;·&nbsp; [**📖 How To Use**](./HOW_TO_USE.md) &nbsp;·&nbsp; [**🗺 Product Plan**](./CAMPUSGUARD_PLAN.md) &nbsp;·&nbsp; [**🏗 Build Instructions**](./AGENT_BUILD_INSTRUCTIONS.md)
+[**📖 How To Use**](./HOW_TO_USE.md) &nbsp;·&nbsp; [**🗺 Product Plan**](./CAMPUSGUARD_PLAN.md) &nbsp;·&nbsp; [**🏗 Build Instructions**](./AGENT_BUILD_INSTRUCTIONS.md)
 
 <br />
 
